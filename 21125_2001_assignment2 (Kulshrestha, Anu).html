@@ -1,0 +1,180 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21125_2001_assignment2 (Kulshrestha, Anu)</title>
+    <meta charset="utf-8" />
+    
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Introduction to JavaScript         //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //               Assignment No. : 2                                  // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    
+    <script>
+      //variable for accepting the email id from user
+      var email_id = "Not Set";
+      
+      //variable initialized for @ position in email id
+      var at_position = -1;      
+      
+      //variable initialized for user name in email id
+      var user_name = "Not Known";
+      
+      //variable initialized for dot position in user name of email id
+      var dot_position = -1;
+      
+      //variable initialized for dot position in domain part of email id
+      var domain_dot_position = -1;
+      
+      //variable initialized for extracting the domain part of email id
+      var domain_part = "Not set";
+      
+      //array for special characters
+      var special_char = new Array("`","~","!","@","#","$","%","^","&","*","(",")","-","=","+","[","]","{","}","|","\\","/",";",":","\"","\'",",","<",">","?",".");
+      
+      //counter initialized for special character, if any in user name
+      var special_char_check = 0;
+      
+      //a do{...}while loop for all the validation checks and output as asked
+      do
+      {
+        //ask user to enter email id
+        email_id = prompt("Please enter an email id: ","");
+        
+        //if condition for user to enter something other than "" or null
+        if((email_id != null) && (email_id != ""))
+        {   
+          //get @ position in the email id
+          at_position = email_id.indexOf("@");
+          at_position = parseInt(at_position); 
+          
+          //if @ is not present in email id
+          if(at_position == -1)
+          {              
+            alert("Incorrect email id. Please enter correct email id.");
+          }
+          else //if @ is present in email id
+          {     
+            //get domain part in email id
+            domain_part = email_id.substring(at_position + 1,email_id.length);
+            
+            //get dot position in domain part in email id
+            domain_dot = domain_part.indexOf(".");
+            domain_dot = parseInt(domain_dot);
+            
+            //if dot position in domain part is present
+            if(domain_dot != -1)
+            {  
+              //get user name in email id
+              user_name = email_id.substring(0,at_position);     
+                
+              //if user name in email id is present
+              if((user_name != "") && (user_name != "Not Known"))
+              {               
+                //check if user name in email id is just the special character
+                for(var i=0;i<special_char.length;i++)
+                {
+                  if(user_name==special_char[i])
+                  {
+                    special_char_check=1;
+                    break;
+                  }
+                }         
+                
+                //if user name in email id is not just the special character
+                if(special_char_check==0)
+                {
+                  //show output if domain part is correct
+                  if((domain_dot>0) && ((at_position + domain_dot + 2) < email_id.length))
+                  {    
+                    //get dot position in user name 
+                    dot_position = user_name.indexOf(".");
+                    dot_position = parseInt(dot_position);
+
+                    //if dot exists in user name, show this output 
+                    if(dot_position != -1)
+                    {
+                      document.write("The \"@\" symbol is at position " + (at_position + 1) + "<br />");
+                      document.write("The \".\" character is at position " + (dot_position + 1) + "<br />");
+                      document.write("Thank you, " + user_name + ". Your email: " + email_id + " appears to be ok.");
+                      break;
+                    }
+                    else  //if dot does not exist in user name, show this output
+                    { 
+                      document.write("The \"@\" symbol is at position " + (at_position + 1) + "<br />");
+                      document.write("The \".\" character is at position " + (at_position + domain_dot + 2) + "<br />");
+                      document.write("Thank you, " + user_name + ". Your email: " + email_id + " appears to be ok.");
+                      break;
+                    }
+                  }
+                  else //inform user that the entered email id has wrong domain part 
+                  {
+                    alert("Domain name not correct. Please enter again");
+                    email_id = null;
+                    at_position = -1;
+                    domain_dot = -1;
+                    continue;
+                  }   
+                }
+                else //if user name in email id is just the special character
+                {
+                  alert("User name contains only special character. Please enter again");
+                  email_id = null;
+                  at_position = -1;
+                  domain_dot = -1;
+                  continue;
+                }                            
+              }
+              else //inform user that the entered email id has no user name 
+              {
+                alert("User name either not present or incorrect. Please enter again");
+                email_id = null;
+                at_position = -1;
+                domain_dot = -1;
+                continue;
+              }             
+            }
+            else //inform user that the entered email id has no dot in domain part 
+            {
+              alert("Dot missing in Domain name. Please enter again");
+              email_id = null;
+              at_position = -1;
+              domain_dot = -1;
+              continue;
+            }
+          }
+        }
+        else //keep asking user to enter email id if found blank or null
+        {
+          email_id = null;
+          at_position = -1;
+          domain_dot = -1;
+          continue;
+        }
+      }while((email_id == null) || (at_position == -1) || (domain_dot == -1));
+        
+    </script>
+  </body>
+</html>

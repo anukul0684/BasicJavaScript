@@ -1,0 +1,284 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21125_1901_final_project(Kulshrestha, Anu)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Emilys+Candy&family=Fredericka+the+Great&display=swap" rel="stylesheet">   
+    <meta charset="utf-8" />
+    
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Introduction to JavaScript         //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //                                Final Project                      // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <style>
+      /* font family selection and font size for whole webpage  */
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+      
+      /* CSS for main div of the webpage  */
+      #wrapper{
+        margin: 0 auto;
+        max-width: 960px;
+        background-color: #ccf;
+        position: relative;
+        min-height: 700px;
+        padding-top: 1px;
+        background-image: url(images/background_task.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      
+      /* CSS for toDoList Div of the webpage  */
+      #toDoList{
+        height: 600px;
+        width: 500px;
+        border: 3px groove #3dd;
+        border-radius: 10px;
+        position: absolute;
+        left: 230px;
+        top: 20px;
+        text-align: center;
+        background-color: #eee;
+        opacity: 0.7;
+      }
+      
+      /* CSS for h1 of the webpage  */
+      h1{
+        font-family: "Fredericka the Great", cursive;
+        text-align: center;
+        margin-top: 55px;
+        font-weight: bold;
+        font-size: 2.4em;
+      }
+      
+      /* CSS for p tag of the webpage  */
+      p{        
+        text-align: center;        
+      }
+      
+      /* CSS for anchor tag of the webpage  */
+      a{
+        font-family: "Emilys Candy", cursive;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-decoration-line: none;
+        color: #000;  
+        display: inline-block;
+        padding-top: 20px;
+        height: 50px;
+        width: 400px;
+        border: 2px groove #3dd;
+        border-radius: 10px;
+        pointer-events: all;
+        background-color: #ccf;
+        opacity: 1;        
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <!-- The html code for the webpage  -->
+    <div id="wrapper">
+      <div id="toDoList">
+        <h1>To Do List</h1>
+        <p>
+          <a href="#" onclick="openList(); return false;">View Task</a>
+        </p>
+        <p>
+          <a href="#" onclick="addTask(); return false;">Add Task</a>
+        </p>
+        <p>
+          <a href="#" onclick="deleteTask(); return false;">Delete Task</a>
+        </p>
+      </div>
+    </div>
+    
+    <!-- The JavaScript code for the webpage  -->
+    <script>
+      //Global variables for saving task with due time in a list
+      var task_description = new Array();
+      var task_due = new Array();
+      
+      //Global variables to get task and due time to add in the list.
+      var task_name = "Not Set";
+      var task_time = "Not Yet";
+      
+      //function to add task with due time.
+      function addTask(){   
+        //Ask for task and due time until user clicks cancel.
+        do
+        {
+          //Get task from user.
+          task_name = prompt("Enter task name","");  
+          
+          //If task is entered by user.
+          if((task_name!=null) &&               
+             (task_name!="") &&              
+             (isNaN(task_name)))
+          {
+            //Ask for due time from user.
+            task_time = prompt("Enter the due time","");
+            
+            //If due time is entered by user add to the list.
+            if((task_time!=null) && (task_time!=""))
+            {
+              task_description.push(task_name);
+              task_due.push(task_time);   
+            }
+            //Else inform user that due time is required if any task is added. End the while loop here. 
+            else
+            {
+              alert("You need to enter due time along with the entered task");
+              task_name = null;
+              task_time = null;
+              break;             
+            }
+          }
+          //Else inform user that to enter a task you need to enter some data and click ok.
+          else{
+            alert("You need to enter description to add a task and click ok.");
+            break;
+          }
+        }while((task_name!=null) && (task_time!=null));
+        
+        //open the chromeless window to view list;
+        openList();
+      }
+      
+      //Global variable to get task id or name to delete from list
+      var delete_task;
+      
+      //Global variable to set counter for checking correct id or name entered for deleting task 
+      var delete_count = false;
+      
+      //function to delete from the task list
+      function deleteTask()
+      {
+        //Ask user to enter id or name of the task
+        delete_task = prompt("Enter the task id or name you want to delete");
+        
+        //variable to get int value of the entered value
+        var delete_task_id = parseInt(delete_task);
+        
+        //Check if the entered value is a number
+        if(!(isNaN(delete_task_id)))
+        {
+          //Loop to check if the entered number is in the task list
+          for(var i=0;i<task_description.length;i++)
+          {
+            //check if the entered number is in the list and delete the task with due time from list
+            // Also change the counter to true if id is found in the task list and break the loop
+            if(i == (delete_task_id-1))
+            {
+              task_description.splice((delete_task_id-1),1);
+              task_due.splice((delete_task_id-1),1); 
+              delete_count = true;
+              break;
+            }            
+          }          
+        }        
+        // check if entered value is a character or set of characters
+        else
+        {
+          //convert to lower case for what is entered by the user
+          delete_task = delete_task.toLowerCase();
+          
+          //Run a loop to check if the entered character or set of characters are present in the task names.
+          for(var i=0;i<task_description.length;i++)
+          {
+            //convert the task name in the list to lowercase
+            var delete_task_name = task_description[i].toLowerCase();
+            
+            //check if the entered characters or set of characters are present in the task name
+            //delete the tasks along with their due times if found and turn the counter to true 
+            //and break the loop.
+            if(delete_task_name.indexOf(delete_task) != -1)
+            {
+              task_description.splice(i,1);
+              task_due.splice(i,1);   
+              delete_count = true;
+              break;
+            }            
+          }          
+        }
+        //if neither the id nor the character matches the task id or name then counter remains false
+        //hence inform user that the id and name are not in the list to delete.
+        if(!(delete_count))
+        {
+          alert("Task number or task name is not in the list");
+        }
+        
+        //open the chromeless window to see the updated list.
+        openList();
+      }
+        
+      //Global variable for opening a chromeless window.
+      var list_window; 
+      
+      //function to open chromeless window and show the list.
+      function openList()
+      {
+        //open the chromeless window with width, height
+        list_window = window.open('','task list','width=800,height=535,resizable=yes,top=10,left=10,scrollbars=yes');
+        
+        //keep the chromeless window always above all windows
+        list_window.focus();
+        
+        //Google font linked for content in chromeless window
+        list_window.document.write("<link href=\"https://fonts.googleapis.com/css2?family=Emilys+Candy&display=swap\" rel=\"stylesheet\">")
+        
+        //CSS for the chromeless window
+        list_window.document.write("<style>body{font-family:\"Emilys Candy\", cursive; font-size:16px; background-image: url(images/task_list_background.jpg); background-size: cover; background-repeat: no-repeat; text-align:center; position:relative;} </style>");
+        
+        //CSS for the table that will display list
+        list_window.document.write("<style>table{background-color:#ccc; border: 2px solid #000; border-collapse: collapse; width: 80%; position: absolute; left: 10%; opacity: 0.8; margin-bottom: 30px;} </style>");
+        
+        //CSS for the cells of the table.
+        list_window.document.write("<style>td,th{font-weight:bold; border: 2px solid #000; padding: 10px;} td:first-of-type{text-align: center;} </style>");
+        
+        //Heading for the chromeless window
+        list_window.document.write("<h1>Task List</h1>");
+        
+        //create a table for task list
+        list_window.document.write("<table>");
+        
+        //create a row with heading of the task list
+        list_window.document.write("<tr>");
+        list_window.document.write("<th>#</th>");  
+        list_window.document.write("<th>Task Description</th>");  
+        list_window.document.write("<th>Task Due</th>");  
+        list_window.document.write("</tr>");
+        
+        //create a for loop for display the task with its due time and id in row and column
+        for(var i=0;i<task_description.length;i++){
+          list_window.document.write("<tr>");          
+          list_window.document.write("<td>"+ (i+1) + "</td>");
+          list_window.document.write("<td>"+ task_description[i] + "</td>");
+          list_window.document.write("<td>"+ task_due[i] + "</td>");          
+          list_window.document.write("</tr>");          
+        }
+        
+        //end the table tag.
+        list_window.document.write("</table>");
+        
+        //close the content writing in the chromeless window
+        list_window.document.close();
+      }    
+    </script>  
+  </body>
+</html>

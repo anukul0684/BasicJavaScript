@@ -1,0 +1,213 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21125_2001_assignment1 (Kulshrestha, Anu)</title>
+    <meta charset="utf-8" />
+    
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Introduction to JavaScript         //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //               Assignment No. : 1                                  // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"  />
+    <style>
+      /*Applying CSS to the html code for font-family, size, and background color of the viewport.*/
+      body{
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        background-color: #eef;
+        position: relative;
+      }
+      
+      #wrapper{
+        margin: 0 auto;
+        max-width: 960px;
+        padding-top: 1px;       
+        box-sizing: border-box;
+      }
+      
+      header{
+        color:#e44;
+        padding-top: 1px;
+        height: 100px;
+        background-color: #eee; 
+        position: fixed;  
+        width: 98.5%;
+        top: 0;
+        z-index: 100;
+      }
+      
+      h1{
+        position: absolute;
+        left: 20%;
+        top: 30px;
+      }
+      
+      nav{
+        height: 50px;
+        background-color: #ccc;
+        position: fixed; 
+        top: 100px;
+        z-index: 101;
+        width: 98.5%;
+      }
+      
+      ul#nav_menu{
+        text-align: center;
+        font-weight: bold;
+      }
+      
+      ul#nav_menu li{
+        display: inline-block;
+        list-style-type: none;
+        padding: 5px 5px 5px 5px;
+        width: 130px;
+      }
+      
+      #nav_menu li a{
+        padding: 0 20px 0 20px;
+        text-decoration: none;
+        color: #e44;
+      }
+      
+      section{
+        min-height: 550px;
+        background-color: #eee; 
+        padding-top: 1px;
+        position: absolute;
+        top: 144px;   
+        width: 960px;
+        box-sizing: border-box;
+      }
+      
+      section p{
+        padding: 10px 20px 0 25px;
+      }
+      
+      footer{
+        min-height: 70px;
+        background-color: #ccc; 
+        position: absolute;
+        top: 696px;
+        width: 99%;
+      }
+      
+      ul#footer_menu{
+        text-align: center;
+        font-weight: bold;        
+      }
+      
+      ul#footer_menu li{
+        display: inline-block;
+        list-style-type: none;
+        padding: 10px 5px 10px 5px;
+        width: 150px;
+      }
+      
+      #footer_menu li a{
+        padding: 0 20px 0 20px;
+        text-decoration: none;
+        color: #e44;
+      }     
+      
+      li:hover{
+        background-color: #eee;
+      }
+      
+    </style>  
+    
+  </head>
+
+  <body>
+    <script>      
+        
+      // variable created to hold the value of Heading of the Browser.
+      // It will also be used wherever the content will be required to use.
+      var main_heading="JavaScript";
+      
+      // variable created to hold the value of Content of which the heading is about.
+      var content_name="Web Development";
+      
+      // variable created to hold the value of type of programming language is the heading.
+      var language_type="cross browser";
+      
+      //header element for heading of the webpage
+      document.write("<header>");
+      
+      // The code for putting html heading 1 for variable 
+      // main_heading and appropriate concatination.
+      document.write("<h1>" + main_heading + "</h1>");
+      
+      document.write("</header>");
+      
+      //nav element for navigation menu of the webpage
+      document.write("<nav>");
+        //navigation menu of the webpage
+        document.write("<strong><ul id=\"nav_menu\">");
+          document.write("<li>");
+            document.write("<a href=\"#\">Home</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">Language</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">About Us</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">FAQs</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">Contact Us</a>");
+          document.write("</li>");
+        document.write("</ul></strong>");
+      
+      document.write("</nav>");
+      
+      //wrapper div for main content of webpage
+      document.write("<div id=\"wrapper\">");
+      
+      //section element for main content of the webpage
+      document.write("<section>");
+      
+      // The code for applying <strong> and <em> for bold and 
+      // italics to variable main_heading and appropriate concatination.
+      document.write("<p><strong>" + main_heading + "</strong> is an important part of " + content_name + ".</p>" );
+        
+      // The code for applying <em> for bold and italics to variable language_type 
+      // and appropriate concatination.
+      document.write("<p>It is an easy to use, <em>" + language_type + "</em> programming language.</p>");
+      
+      document.write("</section>");
+      
+      document.write("</div>");
+      
+      //footer element for footer menu of the page
+      document.write("<footer>");
+        //footer menu of the webpage
+        document.write("<strong><ul id=\"footer_menu\">");
+          document.write("<li>");
+            document.write("<a href=\"#\">Website Links</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">Editorial Blog</a>");
+          document.write("</li>");
+          document.write("<li>");
+            document.write("<a href=\"#\">Contact Us</a>");
+          document.write("</li>");
+        document.write("</ul>");
+      document.write("</footer></strong>");
+    </script>
+  </body>
+</html>
